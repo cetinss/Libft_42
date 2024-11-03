@@ -1,36 +1,35 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_atoi.c                                          :+:      :+:    :+:   */
+/*   ft_strnstr.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: sencetin <sencetin@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024/10/08 19:57:30 by sencetin          #+#    #+#             */
-/*   Updated: 2024/11/02 11:10:31 by sencetin         ###   ########.fr       */
+/*   Created: 2024/10/08 19:55:41 by sencetin          #+#    #+#             */
+/*   Updated: 2024/10/28 11:15:03 by sencetin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-int	ft_atoi(const char *str)
+#include "libft.h"
+
+char	*ft_strnstr(const char *str, const char *to_find, size_t len)
 {
-	int	i;
-	int	sign;
-	int	result;
+	size_t	i;
+	size_t	j;
 
 	i = 0;
-	sign = 1;
-	result = 0;
-	while ((str[i] >= 9 && str[i] <= 13) || str[i] == 32)
-		i++;
-	if (str[i] == '-' || str[i] == '+')
+	if (to_find[0] == '\0')
+		return ((char *)str);
+	if (len == 0)
+		return (NULL);
+	while (i < len && str[i] != '\0')
 	{
-		if (str[i] == '-')
-			sign *= -1;
+		j = 0;
+		while (str[i + j] == to_find[j] && to_find[j] && (i + j) < len)
+			j++;
+		if (to_find[j] == '\0')
+			return ((char *)&str[i]);
 		i++;
 	}
-	while (str[i] >= '0' && str[i] <= '9')
-	{
-		result = result * 10 + (str[i] - '0');
-		i++;
-	}
-	return (result * sign);
+	return (NULL);
 }

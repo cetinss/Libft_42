@@ -1,36 +1,42 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_atoi.c                                          :+:      :+:    :+:   */
+/*   ft_strjoin.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: sencetin <sencetin@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024/10/08 19:57:30 by sencetin          #+#    #+#             */
-/*   Updated: 2024/11/02 11:10:31 by sencetin         ###   ########.fr       */
+/*   Created: 2024/10/22 11:36:20 by sencetin          #+#    #+#             */
+/*   Updated: 2024/11/02 11:05:55 by sencetin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-int	ft_atoi(const char *str)
-{
-	int	i;
-	int	sign;
-	int	result;
+#include "libft.h"
 
+char	*ft_strjoin(char const *s1, char const *s2)
+{
+	char	*ptr;
+	size_t	len_s1;
+	size_t	len_s2;
+	size_t	i;
+
+	if (!s1 || !s2)
+		return (NULL);
+	len_s1 = ft_strlen(s1);
+	len_s2 = ft_strlen(s2);
+	ptr = (char *)malloc(len_s1 + len_s2 + 1);
+	if (!ptr)
+		return (NULL);
 	i = 0;
-	sign = 1;
-	result = 0;
-	while ((str[i] >= 9 && str[i] <= 13) || str[i] == 32)
-		i++;
-	if (str[i] == '-' || str[i] == '+')
+	while (i < len_s1)
 	{
-		if (str[i] == '-')
-			sign *= -1;
-		i++;
+		ptr[i] = s1[i];
+		++i;
 	}
-	while (str[i] >= '0' && str[i] <= '9')
+	while (i < len_s1 + len_s2)
 	{
-		result = result * 10 + (str[i] - '0');
-		i++;
+		ptr[i] = s2[i - len_s1];
+		++i;
 	}
-	return (result * sign);
+	ptr[i] = '\0';
+	return (ptr);
 }
