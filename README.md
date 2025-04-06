@@ -27,3 +27,5 @@ All functions are implemented in C, tested thoroughly, and compiled with a custo
 git clone https://github.com/cetinss/Libft_42.git
 cd Libft_42
 make
+```
+Feel free to check out the rest of my projects on [my GitHub profile](https://github.com/cetinss)!
